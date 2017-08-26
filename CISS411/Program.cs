@@ -14,6 +14,7 @@ namespace CISS411
     {
         public static void Main(string[] args)
         {
+            //Added useless comment 
             BuildWebHost(args).Run();
         }
 
