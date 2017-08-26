@@ -8,7 +8,7 @@ namespace CISS411
         public static void Main(string[] args)
         {
             //Todd Roberts 
-            //Michelle Meyer
+            //Michelle Meyer sucks
             BuildWebHost(args).Run();
         }
 
