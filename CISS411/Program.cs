@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using CISS411.Models;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace CISS411
@@ -7,8 +8,9 @@ namespace CISS411
     {
         public static void Main(string[] args)
         {
-            //Todd Roberts 
-            BuildWebHost(args).Run();
+            BuildWebHost(args)
+                .SeedDatabase()
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
