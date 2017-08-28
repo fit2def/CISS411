@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CISS411", "CISS411\CISS411.csproj", "{74471A9D-C493-45EF-82DA-219FD089B657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CISS411.Tests", "CISS411.Tests\CISS411.Tests.csproj", "{5F6098F9-760F-4B42-A996-00A62F2430B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CISS411.Tests", "CISS411.Tests\CISS411.Tests.csproj", "{5F6098F9-760F-4B42-A996-00A62F2430B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

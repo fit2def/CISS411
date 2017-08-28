@@ -8,7 +8,7 @@ namespace CISS411.Controllers
     public class HomeController : Controller
     {
         private IExampleRepository repository;
-        private const int pageSize = 1;
+        public int PageSize { get; set; } = 1;
 
         public HomeController(IExampleRepository repo)
         {
@@ -18,7 +18,7 @@ namespace CISS411.Controllers
         public IActionResult Index(int page = 1) =>
             View(repository.Models()
                 .OrderBy(p => p.ID)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize));
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize));
     }
 }
