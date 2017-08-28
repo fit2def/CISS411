@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CISS411.Models;
+using System.Linq;
 
 namespace CISS411.Controllers
 {
@@ -7,12 +8,17 @@ namespace CISS411.Controllers
     public class HomeController : Controller
     {
         private IExampleRepository repository;
+        private const int pageSize = 1;
 
         public HomeController(IExampleRepository repo)
         {
             repository = repo;
         }
 
-        public IActionResult Index() => View(repository.Models());
+        public IActionResult Index(int page = 1) =>
+            View(repository.Models()
+                .OrderBy(p => p.ID)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize));
     }
 }
