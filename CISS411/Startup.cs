@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using CISS411.Models.Interfaces;
 using CISS411.Models.Miscellaneous;
+using AutoMapper;
+using CISS411.ViewModels;
+using CISS411.Models.DomainModels;
 
 namespace CISS411
 {
@@ -31,6 +34,7 @@ namespace CISS411
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+
             if (env.IsDevelopment())
             {
                 loggerFactory.AddDebug(LogLevel.Information);

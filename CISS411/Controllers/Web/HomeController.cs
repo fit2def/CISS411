@@ -1,7 +1,7 @@
 ﻿using CISS411.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CISS411.Controllers
+namespace CISS411.Controllers.Web
 {
     public class HomeController : Controller
     {

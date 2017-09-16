@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
+using CISS411.Models.Miscellaneous;
 
-namespace CISS411.Models.Miscellaneous
+namespace CISS411.Models.Extensions
 {
-    public static class ExtensionMethods
+    public static class Seeder
     {
         public static IWebHost SeedDatabase(this IWebHost host)
         {

@@ -8,5 +8,9 @@ namespace CISS411.Models.Interfaces
     {
         Task<List<Event>> Events();
         Task<List<Book>> Books();
+        void AddEvent(Event anEvent);
+        void AddBook(Book book);
+        Task<bool> SaveChangesAsync();
+        
     }
 }
