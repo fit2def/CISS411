@@ -1,25 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CISS411.Models.Interfaces;
-using CISS411.Models.DomainModels;
-using System.Linq;
-using System;
+﻿using CISS411.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CISS411.Controllers
 {
-
     public class HomeController : Controller
     {
-        private IModelRepository repository;
-
-        public HomeController(IModelRepository repo)
+        IModelRepository _repository;
+        
+        public HomeController(IModelRepository repository)
         {
-            repository = repo;
+            _repository = repository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-  
+        public IActionResult Index() =>
+            View(_repository);   
     }
 }

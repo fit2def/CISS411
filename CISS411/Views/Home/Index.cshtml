@@ -1,2 +1,4 @@
-﻿@await Component.InvokeAsync("Event")
-@await Component.InvokeAsync("Book")
+﻿@model IModelRepository
+
+@await Component.InvokeAsync("Event", Model)
+@await Component.InvokeAsync("Book", Model)

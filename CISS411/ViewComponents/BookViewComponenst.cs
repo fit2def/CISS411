@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CISS411.ViewComponents
 {
-    public class EventViewComponent : ViewComponent
+    public class BookViewComponent : ViewComponent
     {
-        private readonly ILogger<EventViewComponent> _logger;
+        private readonly ILogger<BookViewComponent> _logger;
 
-        public EventViewComponent(ILogger<EventViewComponent> logger)
+        public BookViewComponent(ILogger<BookViewComponent> logger)
         {
             _logger = logger;
         }
@@ -21,14 +21,14 @@ namespace CISS411.ViewComponents
         {
             try
             {
-                var events = await _repository.Events();
-                var current = events.FirstOrDefault(e => e.IsCurrent);
+                var books = await _repository.Books();
+                var current = books.FirstOrDefault(b => b.IsCurrent);
                 return View(current);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to retrieve eventss: {ex.Message}");
-                return View(new Event());
+                _logger.LogError($"Failed to retrieve books: {ex.Message}");
+                return View(new Book());
             }
         }
     }
