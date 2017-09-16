@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace CISS411.Models
+namespace CISS411.Models.Miscellaneous
 {
     public static class ExtensionMethods
     {

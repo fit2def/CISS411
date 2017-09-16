@@ -1,6 +1,6 @@
-﻿using CISS411.Models;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using CISS411.Models.Miscellaneous;
 
 namespace CISS411
 {
