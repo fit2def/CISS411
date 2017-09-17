@@ -11,13 +11,13 @@
     <header>
         @if (!User.Identity.IsAuthenticated)
         {
-            <a href="/Account/Login">Login</a>
+            <a asp-controller="Account" asp-action="Login">Login or Signup</a>
         }
         else
         {
-            <a href="/Account/Landing">Account</a>
+            <a asp-controller="Account" asp-action="Landing">Account</a>
+            <a asp-controller="Account" asp-action="Logout">Logout</a>
         }       
-
     </header>
     <div>
         @RenderBody()

@@ -9,16 +9,19 @@ using CISS411.Models.Miscellaneous;
 using CISS411.Models.DomainModels;
 using Microsoft.AspNetCore.Identity;
 using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CISS411
 {
     public class Startup
     {
-        IConfigurationRoot Configuration;
+        IConfigurationRoot _config;
+        IHostingEnvironment _env;
 
         public Startup(IHostingEnvironment env)
         {
-            Configuration = new ConfigurationBuilder()
+            _env = env;
+            _config = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json").Build();
         }
@@ -26,7 +29,7 @@ namespace CISS411
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:AzureConnection"]));
+                options.UseSqlServer(_config["ConnectionStrings:AzureConnection"]));
             services.AddScoped<IModelRepository, ModelRepository>();
 
             services.AddIdentity<Member, IdentityRole>(config =>
@@ -42,12 +45,17 @@ namespace CISS411
             services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromDays(365);
-                options.LoginPath = "/Account/LogIn";
-                options.LogoutPath = "/Account/LogOut";
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
             });
 
             services.AddLogging();
             services.AddMvc();
+            services.AddMvc(config =>
+            {
+                //uncomment the line below once HTTPS has actually been set up.
+                //if (_env.IsProduction()) config.Filters.Add(new RequireHttpsAttribute());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -66,7 +74,6 @@ namespace CISS411
                 loggerFactory.AddDebug(LogLevel.Error);
             }
       
-            
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",

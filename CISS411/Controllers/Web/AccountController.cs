@@ -24,7 +24,7 @@ namespace CISS411.Controllers.Web
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel vm)
+        public async Task<ActionResult> Login(LoginViewModel vm, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -32,22 +32,32 @@ namespace CISS411.Controllers.Web
                     vm.Email, vm.Password, true, false);
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction("Landing");
+                    if (string.IsNullOrWhiteSpace(returnUrl))
+                        return RedirectToAction("Landing");
+                    else
+                        return Redirect(returnUrl);
                 }
                 else
                 {
                     ModelState.AddModelError("", "Username or password incorrect"); // This is for C# validation
                 }
-
             }
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await _signInManager.SignOutAsync();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
 
         [Authorize]
         public IActionResult Landing()
         {
-
             return View();
         }
     }
