@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using CISS411.Models.Interfaces;
 using CISS411.Models.Miscellaneous;
-using AutoMapper;
-using CISS411.ViewModels;
 using CISS411.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace CISS411
 {
@@ -28,12 +28,33 @@ namespace CISS411
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:AzureConnection"]));
             services.AddScoped<IModelRepository, ModelRepository>();
+
+            services.AddIdentity<Member, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromDays(365);
+                options.LoginPath = "/Account/LogIn";
+                options.LogoutPath = "/Account/LogOut";
+            });
+
             services.AddLogging();
             services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseStatusCodePages();
 
             if (env.IsDevelopment())
             {
@@ -44,9 +65,8 @@ namespace CISS411
             {
                 loggerFactory.AddDebug(LogLevel.Error);
             }
+      
             
-            app.UseStatusCodePages();
-            app.UseStaticFiles();
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",

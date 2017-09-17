@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CISS411.Models.Miscellaneous;
+using CISS411.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace CISS411.Models.Extensions
 {
@@ -15,8 +18,9 @@ namespace CISS411.Models.Extensions
                 var services = scope.ServiceProvider;
                 try
                 {
+                    var manager = services.GetRequiredService<UserManager<Member>>();
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    SeedData.EnsurePopulated(context);
+                    Task.WaitAll(SeedData.EnsurePopulated(context, manager));
                 }
                 catch (Exception ex)
                 {

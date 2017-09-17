@@ -16,9 +16,11 @@ namespace CISS411.Controllers.Api
         private IModelRepository _repository;
         private ILogger<EventsController> _logger;
 
-        public EventsController(IModelRepository repository)
+        public EventsController(IModelRepository repository, 
+            ILogger<EventsController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         [HttpGet("")]

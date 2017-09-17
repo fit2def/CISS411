@@ -1,4 +1,9 @@
 ﻿@model IModelRepository
 
+
+@section Scripts {
+    
+}
+
 @await Component.InvokeAsync("Event", Model)
 @await Component.InvokeAsync("Book", Model)
