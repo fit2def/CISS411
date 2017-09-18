@@ -7,7 +7,6 @@ using CISS411.Models.DomainModels;
 
 namespace CISS411
 {
-    //testing github
     public class Program
     {
         public static void Main(string[] args)
