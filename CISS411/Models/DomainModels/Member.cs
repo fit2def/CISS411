@@ -20,8 +20,8 @@ namespace CISS411.Models.DomainModels
 
     public enum Major
     {
-        NoneGiven,
-        Undecided,
+        NoneGiven, 
+        Undecided, 
         Science, 
         Math,
         English

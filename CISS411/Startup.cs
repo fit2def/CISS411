@@ -32,7 +32,7 @@ namespace CISS411
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_config["ConnectionStrings:AzureConnection"]));
-            services.AddScoped<IModelRepository, ModelRepository>();
+            services.AddTransient<IModelRepository, ModelRepository>();
 
             services.AddIdentity<Member, IdentityRole>(config =>
             {

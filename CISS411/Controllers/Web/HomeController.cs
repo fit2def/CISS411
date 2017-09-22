@@ -12,7 +12,11 @@ namespace CISS411.Controllers.Web
             _repository = repository;
         }
 
-        public IActionResult Index() =>
-            View(_repository);   
+        public IActionResult Index()
+        {
+            ViewBag.Title = "Tech Entrepreneurship";
+            return View(_repository);
+        }
+          
     }
 }

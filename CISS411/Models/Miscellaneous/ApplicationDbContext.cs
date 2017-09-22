@@ -12,5 +12,6 @@ namespace CISS411.Models.Miscellaneous
         // Register your models here as DbSet generics.
         public DbSet<Event> Events { get; set; }
         public DbSet<Book> Books { get; set; }
+  
     }
 }

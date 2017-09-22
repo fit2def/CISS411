@@ -35,7 +35,7 @@ namespace CISS411.Models.Miscellaneous
             _context.Add(book);
         }
 
-        public  async Task<bool> SaveChangesAsync()
+        public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0; //saving returns # rows affected.
         }
