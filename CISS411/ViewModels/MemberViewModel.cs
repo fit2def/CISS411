@@ -7,5 +7,6 @@ namespace CISS411.ViewModels
 {
     public class MemberViewModel
     {
+        public string Name { get; set; }
     }
 }

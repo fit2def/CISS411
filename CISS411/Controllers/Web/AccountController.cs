@@ -16,6 +16,7 @@ namespace CISS411.Controllers.Web
             _signInManager = signIn;        
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -33,7 +34,7 @@ namespace CISS411.Controllers.Web
                 if (signInResult.Succeeded)
                 {
                     if (string.IsNullOrWhiteSpace(returnUrl))
-                        return RedirectToAction("Landing");
+                        return Redirect("/Home/Index");
                     else
                         return Redirect(returnUrl);
                 }
@@ -42,7 +43,8 @@ namespace CISS411.Controllers.Web
                     ModelState.AddModelError("", "Username or password incorrect"); // This is for C# validation
                 }
             }
-            return View();
+            TempData["ShowLogin"] = true;
+            return Redirect("/Home/Index");
         }
 
         public async Task<IActionResult> Logout()

@@ -5,28 +5,19 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="~/scripts/navigation.js"></script>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/25-animate.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/style.css" />
     <title>@ViewBag.Title</title>
 </head>
 
 <body>
     <header>
-        @*@if (!User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="Account" asp-action="Login">Login or Signup</a>
-        }
-        else
-        {
-            <a asp-controller="Account" asp-action="Landing">Account</a>
-            <a asp-controller="Account" asp-action="Logout">Logout</a>
-        } *@
+
 
         <!-- Navbar (sit on top) -->
         <div class="w3-top">
@@ -38,29 +29,20 @@
                 <a href="#aboutUs" class="w3-bar-item w3-button w3-hide-small">ABOUT US</a>
                 <a href="#Books" class="w3-bar-item w3-button w3-hide-small">BOOKS</a>
                 <a href="#Events" class="w3-bar-item w3-button w3-hide-small">EVENTS</a>
-                <a href="#Log_In" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="w3-bar-item w3-button w3-hide-small">LOGIN</a>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a href="#Log_In" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="w3-bar-item w3-button w3-hide-small">LOGIN</a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Logout" class="w3-bar-item w3-button w3-hide-small">LOGOUT</a>
+                    <a asp-controller="Account" asp-action="Landing" class="w3-bar-item w3-button w3-hide-small">ACCOUNT</a>
 
-                <!--            CREATE AN ACCOUNT FORM     -->
+                }
 
 
-                <div id="id01" class="modal">
-                    <form class="modal-content animate">
-                        <div class="imgcontainer">
-                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                        </div>
+                @Html.Partial("_Login", new LoginViewModel()); 
 
-                        <div class="container">
-                            <label><b>Email</b></label>
-                            <input type="text" placeholder="Enter Email" name="uname" required>
-
-                            <label><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required>
-
-                            <button type="submit" id="Button">Create Account</button>
-                        </div>
-                        <p style="text-align: center;">Already have an account? <a href="LogIn.html">Login</a></p>
-                    </form>
-                </div>
             </div>
 
             <!-- Navbar on small screens -->
@@ -94,17 +76,21 @@
             <i class="fa fa-envelope fa-fw w3-xlarge w3-margin-right"></i> Email: mail@mail.com<br>
         </div>
     </footer>
+
     @RenderSection("Scripts", false)
+
+
     <script src="http://insitestore2.mbsbooks.com/bloomusandbox/StoreFiles/25-SchoolFiles/25-New-Website/25-js/25-wow.min.js"></script>
     <script>
-        var wow = new WOW({
-            boxClass: 'wow', // default
-            animateClass: 'animated', // default
-            offset: 0, // default
-            mobile: false, // default
-            live: true // default
-        })
+            var wow = new WOW({
+                boxClass: 'wow', // default
+                animateClass: 'animated', // default
+                offset: 0, // default
+                mobile: false, // default
+                live: true // default
+            });
         wow.init();
     </script>
+
 </body>
 </html>
