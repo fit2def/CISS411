@@ -31,7 +31,7 @@ namespace CISS411
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(_config["ConnectionStrings:AzureConnection"]));
+                options.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]));
             services.AddTransient<IModelRepository, ModelRepository>();
 
             services.AddIdentity<Member, IdentityRole>(config =>

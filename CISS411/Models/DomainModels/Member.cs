@@ -12,7 +12,6 @@ namespace CISS411.Models.DomainModels
         public string LastName { get; set; }
         [Required]
         public Major Major { get; set; }
-        List<string> Interests { get; set; }
         public Book CurrentBook { get; set; }
         public int EventsAttended { get; set; } 
         
@@ -20,10 +19,16 @@ namespace CISS411.Models.DomainModels
 
     public enum Major
     {
-        NoneGiven, 
-        Undecided, 
-        Science, 
-        Math,
-        English
+        Undecided,
+        GeneralStudies,
+        BusinessMarketing,
+        ComputerScienceMath,
+        CriminalJusticeHumanServices,
+        Education,
+        FineArtsMusic,
+        HistoryPhilosophyPoliSci,
+        EnglishLiteratureCommunication,
+        ScienceNursing, 
+        PsychologySociology
     }
 }

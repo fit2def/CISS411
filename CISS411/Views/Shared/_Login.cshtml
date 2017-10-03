@@ -1,38 +1,26 @@
 ﻿@model LoginViewModel
 
 
-@section Scripts {
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
-
-
-<div id="id01" class="modal">
-    <form class="modal-content animate" method="post" novalidate asp-controller="Account" asp-action="Login">
-        <div asp-validation-summary="ModelOnly"></div>
+<div id="id01" class="modal" ng-controller="LoginController as loginCtrl">
+    <form ng-submit="loginCtrl.login()" name="loginForm" class="modal-content animate" method="post" novalidate asp-controller="Account" asp-action="Login">
+        
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         </div>
 
         <div class="container">
-            <label><b>Email</b></label>
-            <input asp-for="Email" placeholder="Enter Email" required />
-
-            <label><b>Password</b></label>
-            <input type="password" asp-for="Password" placeholder="Enter Password" required />
-
-            <button type="submit" id="Button">Login</button>
-            <span asp-validation-for="Email"></span>
-            <span asp-validation-for="Password"></span>
+           
+            <input asp-for="Email" name="email" placeholder="Enter Email" ng-model="loginCtrl.email" ng-pattern="/ccis.edu$/" required />
+            <span ng-show="loginForm.email.$error.required && loginForm.email.$dirty" class="text-warning">You must provide your e-mail address</span>
+            <span ng-show="loginForm.email.$error.pattern && loginForm.email.$dirty" class="text-warning">You must provide a Columbia College e-mail address</span>
+            <input type="password" name="password" asp-for="Password" placeholder="Enter Password" ng-model="loginCtrl.password" required />
+            <span ng-show="loginForm.password.$error.required && loginForm.password.$dirty" class="text-warning">You must provide a password</span>
+            <button type="submit" id="Button" ng-disabled="loginForm.$invalid">Login</button>
+            <span id="incorrectCredentials" ng-show="login.invalidCredentials" class="text-warning">Email or password incorrect</span>
+            
         </div>
-        <p style="text-align: center;">Don't have an account? <a href="#">Sign Up</a></p>
+        <p style="text-align: center;">Don't have an account? <a asp-controller="Account" asp-action="Signup">Sign Up</a></p>
     </form>
 </div>
 
-@if (bool.Parse(TempData["ShowLogin"]?.ToString() ?? "false"))
-{
-    <script>
-        document.getElementById('id01').style.display = 'block';
-    </script>
-}
 

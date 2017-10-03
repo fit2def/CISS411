@@ -2,57 +2,25 @@
 
 
 @section Scripts {
-
+    <script src="~/scripts/angularScripts/ciss411-app.js"></script>
+    <script src="~/scripts/angularScripts/validation-service.js"></script>
+    <script src="~/scripts/angularScripts/login-controller.js"></script>
 }
 
 <!-- Container (About Section) -->
 <div class="w3-content w3-container w3-padding-64" id="aboutUs">
     <h3 class="w3-center">About Us</h3>
-    <p>The Entrepreneurship Club aims to provide a conduit by which students can access entrepreneurial resources, network with community entrepreneurs, and share ideas. The club is dedicated to furthering understanding about new and small businesses. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-</div>
-
-<div class="w3-row w3-center w3-dark-grey w3-padding-16" id="Books">
-</div>
-
-<!-- Second Parallax Image with Books Text -->
-<div class="bgimg-2 w3-display-container w3-opacity-min">
-    <div class="w3-display-middle">
-        <span class="w3-xxlarge w3-text-white w3-wide wow bounceInDown">BOOKS</span>
-    </div>
-</div>
-<div class="w3-row w3-center w3-dark-grey w3-padding-16">
-</div>
-
-<!-- Container (Books Section) -->
-<div class="w3-content w3-container w3-padding-64" id="portfolio">
-    <h3 class="w3-center">Check Out Books</h3>
-    <div class="w3-row w3-padding-32 w3-section">
-        <div class="w3-col m6 w3-container">
-            <img alt="BooksFlyer" src="~/Images/Book.png" class="img-responsive" />
-        </div>
-
-        <div class="w3-col m6 w3-panel">
-            <form action="/action_page.php" target="_blank">
-                <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                    <div class="w3-half">
-                        <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-                    </div>
-                    <div class="w3-half">
-                        <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-                    </div>
-                </div>
-                <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
-                <button class="w3-button w3-black w3-right w3-section" type="submit">
-                    <i class="fa fa-paper-plane"></i> Sign Up
-                </button>
-            </form>
-        </div>
-    </div>
+    <p>Tech Entrepreneurship is a first and foremost a social club. We
+    want to provide students with the opportunity to meet others who share
+    their interest in starting businesses. We also like to learn things, 
+    and to share our knowledge with other students. Students involved in 
+    our club will learn valuable skills that will help them no matter</p>
 </div>
 
 <div class="w3-row w3-center w3-dark-grey w3-padding-16" id="Events">
 </div>
-<!-- Third Parallax Image with Events Text -->
+
+<!-- Second Parallax Image with Events Text -->
 <div class="bgimg-3 w3-display-container w3-opacity-min">
     <div class="w3-display-middle">
         <span class="w3-xxlarge w3-text-white w3-wide wow bounceInDown">Events</span>
@@ -61,42 +29,32 @@
 <div class="w3-row w3-center w3-dark-grey w3-padding-16">
 </div>
 
-<!-- Container (Events Section) -->
-<div class="w3-content w3-container w3-padding-64" id="Books">
-    <h3 class="w3-center">Sign Up For Events</h3>
-    <div class="w3-row w3-padding-32 w3-section">
-        <div class="w3-col m6 w3-container">
-            <img alt="EventsFlyer" src="~/Images/Event.jpg" class="img-responsive" />
-        </div>
+@await Component.InvokeAsync("Event", Model)
 
-        <div class="w3-col m6 w3-panel">
+<div class="w3-row w3-center w3-dark-grey w3-padding-16" id="Books">
+</div>
 
-            <form action="/action_page.php" target="_blank">
-                <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                    <div class="w3-half">
-                        <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-                    </div>
-                    <div class="w3-half">
-                        <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-                    </div>
-                </div>
-                <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
-                <button class="w3-button w3-black w3-right w3-section" type="submit">
-                    <i class="fa fa-paper-plane"></i> Sign Up
-                </button>
-            </form>
-        </div>
+<!-- Third Parallax Image with Books Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+    <div class="w3-display-middle">
+        <span class="w3-xxlarge w3-text-white w3-wide wow bounceInDown">BOOKS</span>
     </div>
 </div>
 
-@if (bool.Parse(ViewData["ShowLogin"]?.ToString() ?? "false"))
-{
-    <script>
-        document.getElementById('id01').style.display = 'block';
-    </script>
-}
-
-@*
-@await Component.InvokeAsync("Event", Model)
 @await Component.InvokeAsync("Book", Model)  
-*@
+
+<div class="w3-row w3-center w3-dark-grey w3-padding-16">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

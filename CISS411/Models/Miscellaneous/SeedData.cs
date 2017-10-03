@@ -25,7 +25,7 @@ namespace CISS411.Models.Miscellaneous
                     UserName = "troberts8@cougars.ccis.edu",
                     FirstName = "Todd",
                     LastName = "Roberts",
-                    Major = Major.NoneGiven,
+                    Major = Major.BusinessMarketing,
                     CurrentBook = new Book() { Title = "HTML for Losers" }
                 };
 

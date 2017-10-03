@@ -10,10 +10,12 @@ namespace CISS411.Controllers.Web
     public class AccountController : Controller
     {
         private SignInManager<Member> _signInManager;
+        private UserManager<Member> _userManager;
 
-        public AccountController(SignInManager<Member> signIn)
+        public AccountController(SignInManager<Member> signIn, UserManager<Member> manager)
         {
-            _signInManager = signIn;        
+            _signInManager = signIn;
+            _userManager = manager;
         }
 
         [HttpGet]
@@ -25,26 +27,15 @@ namespace CISS411.Controllers.Web
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel vm, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel vm)
         {
-            if (ModelState.IsValid)
-            {
-                var signInResult = await _signInManager.PasswordSignInAsync(
-                    vm.Email, vm.Password, true, false);
-                if (signInResult.Succeeded)
-                {
-                    if (string.IsNullOrWhiteSpace(returnUrl))
-                        return Redirect("/Home/Index");
-                    else
-                        return Redirect(returnUrl);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Username or password incorrect"); // This is for C# validation
-                }
-            }
-            TempData["ShowLogin"] = true;
-            return Redirect("/Home/Index");
+
+            var signInResult = await _signInManager.PasswordSignInAsync(
+                vm.Email, vm.Password, true, false);
+            if (!signInResult.Succeeded)
+                return BadRequest("This is a bad response");
+            return RedirectToAction("Index", "Home");
+
         }
 
         public async Task<IActionResult> Logout()
@@ -60,6 +51,36 @@ namespace CISS411.Controllers.Web
         [Authorize]
         public IActionResult Landing()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Signup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Signup(SignupViewModel vm)
+        {
+            if (await _userManager.FindByEmailAsync(vm.Email) == null)
+            {
+                Member member = new Member()
+                {
+                    Email = vm.Email,
+                    UserName = vm.Email,
+                    FirstName = vm.FirstName,
+                    LastName = vm.LastName,
+                    Major = vm.Major,
+
+                };
+
+                var result = await _userManager.CreateAsync(member, vm.Password);
+                var signInResult = await _signInManager.PasswordSignInAsync(
+                vm.Email, vm.Password, true, false);
+                return RedirectToAction("Index", "Home");
+            }
+            TempData["ExistingAccount"] = true;
             return View();
         }
     }

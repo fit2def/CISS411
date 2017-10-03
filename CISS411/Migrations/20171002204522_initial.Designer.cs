@@ -12,8 +12,8 @@ using System;
 namespace CISS411.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170917004905_Member-Update")]
-    partial class MemberUpdate
+    [Migration("20171002204522_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

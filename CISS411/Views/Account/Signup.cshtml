@@ -1,0 +1,57 @@
+﻿@model SignupViewModel
+
+<form class="form-horizontal" asp-controller="Account" asp-action="Signup">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">First Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="UserName" placeholder="Enter Your First Name" name="FirstName" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Last Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="UserName" placeholder="Enter Your Last Name" name="LastName" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email</label>
+        <div class="col-sm-10">
+            <input type="Email" class="form-control" id="UserName" placeholder="Enter Your Email Address" name="UserName" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Password:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="pwd" placeholder="Enter Your password" name="pwd" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Verify Password:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="pwd" placeholder="Verify Your password" name="pwd" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Major</label>
+        <div class="col-sm-10">
+            <select>
+                <option value="0">Undecided</option>
+                <option value="1">General Studies</option>
+                <option value="2">Business and Marketing</option>
+                <option value="3">Computer Science and Math</option>
+                <option value="4">Criminal Justice and Human Services</option>
+                <option value="5">Education</option>
+                <option value="6">Fine Arts and Music</option>
+                <option value="7">History, Philosophy, and Political Science</option>
+                <option value="8">English, Literature, and Communication</option>
+                <option value="9">Science and Nursing</option>
+                <option value="10">Psychology and Sociology</option>  
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>

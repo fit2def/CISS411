@@ -1,3 +1,28 @@
 ﻿@model Book
 
-<p>@Model.Title</p>
+<<!-- Container (Books Section) -->
+<div class="w3-content w3-container w3-padding-64" id="portfolio">
+    <h3 class="w3-center">Check Out Books</h3>
+    <div class="w3-row w3-padding-32 w3-section">
+        <div class="w3-col m6 w3-container">
+            <img alt="BooksFlyer" src="~/Images/Book.png" class="img-responsive" />
+        </div>
+
+        <div class="w3-col m6 w3-panel">
+            <form action="" target="_blank">
+                <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                    <div class="w3-half">
+                        <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                    </div>
+                    <div class="w3-half">
+                        <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                    </div>
+                </div>
+                <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+                <button class="w3-button w3-black w3-right w3-section" type="submit">
+                    <i class="fa fa-paper-plane"></i> Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
