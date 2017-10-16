@@ -3,6 +3,7 @@ using CISS411.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CISS411.Controllers.Web
@@ -29,13 +30,12 @@ namespace CISS411.Controllers.Web
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
-
             var signInResult = await _signInManager.PasswordSignInAsync(
                 vm.Email, vm.Password, true, false);
             if (!signInResult.Succeeded)
-                return BadRequest("This is a bad response");
-            return RedirectToAction("Index", "Home");
-
+                return BadRequest();
+            return Ok();
+           
         }
 
         public async Task<IActionResult> Logout()
@@ -47,7 +47,6 @@ namespace CISS411.Controllers.Web
             return RedirectToAction("Index", "Home");
         }
 
-
         [Authorize]
         public IActionResult Landing()
         {
@@ -57,6 +56,8 @@ namespace CISS411.Controllers.Web
         [HttpGet]
         public IActionResult Signup()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
             return View();
         }
 

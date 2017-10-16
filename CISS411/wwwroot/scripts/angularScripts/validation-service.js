@@ -1,14 +1,7 @@
-﻿(function() {
-    var validationService = function($http, $window) {
-        var validate = function (loginObject, invalidCredentials) {
-            $http.post("/AccountController/Login", loginObject)
-                .success(function (response) {
-                    
-                })
-                .error(function (response) {
-                    console.log("There was a problem:", response)
-                    invalidCredentials = true;
-                });
+﻿(function () {
+    var validationService = function ($http) {
+        var validate = function (loginObject) {
+            return $http.post("/Account/Login", loginobject);
         };
 
         return {

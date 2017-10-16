@@ -8,7 +8,6 @@ namespace CISS411.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Major Major { get; set; }
-        public List<string> Interests { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

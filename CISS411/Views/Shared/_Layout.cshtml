@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="CISS411-App">
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <title>@ViewBag.Title</title>
 </head>
 
-<body ng-app="CISS411-App">
+<body ng-controller="LoginController as loginCtrl">
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top">
@@ -23,10 +23,10 @@
                 <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
                     <i class="fa fa-bars"></i>
                 </a>
-                <a href="#home" class="w3-bar-item w3-button">HOME</a>
-                <a href="#aboutUs" class="w3-bar-item w3-button w3-hide-small">ABOUT US</a>
-                <a href="#Books" class="w3-bar-item w3-button w3-hide-small">BOOKS</a>
-                <a href="#Events" class="w3-bar-item w3-button w3-hide-small">EVENTS</a>
+                <a href="/Home/Index/#home" class="w3-bar-item w3-button">HOME</a>
+                <a href="/Home/Index/#aboutUs" class="w3-bar-item w3-button w3-hide-small">ABOUT US</a>
+                <a href="/Home/Index/#Books" class="w3-bar-item w3-button w3-hide-small">BOOKS</a>
+                <a href="/Home/Index/#Events" class="w3-bar-item w3-button w3-hide-small">EVENTS</a>
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <a href="#Log_In" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="w3-bar-item w3-button w3-hide-small">LOGIN</a>
@@ -39,7 +39,7 @@
                 }
 
 
-                @Html.Partial("_Login", new LoginViewModel()); 
+                @Html.Partial("_Login", new LoginViewModel())
 
             </div>
 
@@ -77,6 +77,9 @@
 
     @RenderSection("Scripts", false)
 
+    <script src="~/scripts/angularScripts/ciss411-app.js"></script>
+    <script src="~/scripts/angularScripts/validation-service.js"></script>
+    <script src="~/scripts/angularScripts/login-controller.js"></script>
     <!-- Misc. scripts-->
     <script src="http://insitestore2.mbsbooks.com/bloomusandbox/StoreFiles/25-SchoolFiles/25-New-Website/25-js/25-wow.min.js"></script>
     <script>

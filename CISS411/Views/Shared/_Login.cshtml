@@ -1,7 +1,7 @@
 ﻿@model LoginViewModel
 
 
-<div id="id01" class="modal" ng-controller="LoginController as loginCtrl">
+<div id="id01" class="modal">
     <form ng-submit="loginCtrl.login()" name="loginForm" class="modal-content animate" method="post" novalidate asp-controller="Account" asp-action="Login">
         
         <div class="imgcontainer">
@@ -16,8 +16,8 @@
             <input type="password" name="password" asp-for="Password" placeholder="Enter Password" ng-model="loginCtrl.password" required />
             <span ng-show="loginForm.password.$error.required && loginForm.password.$dirty" class="text-warning">You must provide a password</span>
             <button type="submit" id="Button" ng-disabled="loginForm.$invalid">Login</button>
-            <span id="incorrectCredentials" ng-show="login.invalidCredentials" class="text-warning">Email or password incorrect</span>
-            
+            <span id="incorrectCredentials" ng-show="loginCtrl.invalidCredentials" class="text-warning">Email or password incorrect</span>
+           
         </div>
         <p style="text-align: center;">Don't have an account? <a asp-controller="Account" asp-action="Signup">Sign Up</a></p>
     </form>

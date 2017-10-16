@@ -40,6 +40,7 @@ namespace CISS411
                 config.Password.RequiredLength = 8;
                 config.Password.RequireNonAlphanumeric = false;
                 config.Password.RequireUppercase = false;
+                config.Password.RequireDigit = false;
 
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();

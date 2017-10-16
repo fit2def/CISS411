@@ -1,22 +1,32 @@
-﻿(function(){
+﻿(function () {
     var app = angular.module("CISS411-App");
 
-    var LoginController = function (validationService) {
+    var LoginController = function (validationService, $window) {
         var vm = this;
         vm.invalidCredentials = false;
+      
+            
 
-        vm.login = function () {
+        vm.onsubmit = function () {
             validationService.validate(
                 {
                     email: vm.email,
                     password: vm.password
-                },
-                vm.invalidCredentials
-            );
+                })
+                .then(success, error);
         };
-        
+
+        function success(response) {
+            $window.location.href = "/Home/Index";
+        }
+
+        function error(response) {
+            console.log("there was a problem:", response)
+            vm.invalidcredentials = true;
+        }
+
     };
 
     app.controller("LoginController",
-        ["validationService", LoginController]);
+        ["validationService", "$window", LoginController]);
 }());
