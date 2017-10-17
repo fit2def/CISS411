@@ -255,3 +255,9 @@ span.psw {
 .form-group > label {
     color: white;
 }
+
+.img-responsive {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
