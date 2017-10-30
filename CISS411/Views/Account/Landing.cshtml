@@ -4,4 +4,121 @@
 
 }
 
-<p>Welcome, @Model.Name;.</p>
+
+<h1>Welcome, @Model.FirstName</h1>
+
+<div class="well">
+    <p>Your account information:</p>
+    <ul>
+        <li>First Name: @Model.FirstName</li>
+        <li>Last Name: @Model.LastName</li>
+        <li> Major: 
+            <form asp-controller="Account" asp-action="UpdateAccount">
+                <select name="major" >
+                    @if (Model.Major == Major.Undecided)
+                    {
+                        <option selected="selected" value="0">Undecided</option>
+                    }
+                    else
+                    {
+                        <option value="0">Undecided</option>
+                    }
+                    @if (Model.Major == Major.GeneralStudies)
+                    {
+                        <option selected="selected" value="0">General Studies</option>
+                    }
+                    else
+                    {
+                        <option value="1">General Studies</option>
+                    }
+                    @if (Model.Major == Major.BusinessMarketing)
+                    {
+                        <option selected="selected" value="0">Business and Marketing</option>
+                    }
+                    else
+                    {
+                        <option value="2">Business and Marketing</option>
+                    }
+                    @if (Model.Major == Major.ComputerScienceMath)
+                    {
+                        <option selected="selected" value="0">Computer Science and Math</option>
+                    }
+                    else
+                    {
+                        <option value="3">Computer Science and Math</option>
+                    }
+                    @if (Model.Major == Major.CriminalJusticeHumanServices)
+                    {
+                        <option selected="selected" value="0">Criminal Justice and Human Services</option>
+                    }
+                    else
+                    {
+                        <option value="4">Criminal Justice and Human Services</option>
+                    }
+                    @if (Model.Major == Major.Education)
+                    {
+                        <option selected="selected" value="0">Education</option>
+                    }
+                    else
+                    {
+                        <option value="5">Education</option>
+                    }
+                    @if (Model.Major == Major.FineArtsMusic)
+                    {
+                        <option selected="selected" value="0">Fine Arts and Music</option>
+                    }
+                    else
+                    {
+                        <option value="6">Fine Arts and Music</option>
+                    }
+                    @if (Model.Major == Major.HistoryPhilosophyPoliSci)
+                    {
+                        <option selected="selected" value="0">History, Philosophy, and Political Science</option>
+                    }
+                    else
+                    {
+                        <option value="7">History, Philosophy, and Political Science</option>
+                    }
+                    @if (Model.Major == Major.EnglishLiteratureCommunication)
+                    {
+                        <option selected="selected" value="0">English, Literature, and Communication</option>
+                    }
+                    else
+                    {
+                        <option value="8">English, Literature, and Communication</option>
+                    }
+                    @if (Model.Major == Major.ScienceNursing)
+                    {
+                        <option selected="selected" value="0">Science and Nursing</option>
+                    }
+                    else
+                    {
+                        <option value="9">Science and Nursing</option>
+                    }
+                    @if (Model.Major == Major.PsychologySociology)
+                    {
+                        <option selected="selected" value="0">Psychology and Sociology</option>
+                    }
+                    else
+                    {
+                        <option value="10">Psychology and Sociology</option>
+                    }
+                 
+                </select>
+                <button type="submit" class="btn btn-info">Update Major</button>
+            </form>
+
+        </li>
+
+       
+
+        @{
+            if (Model.CurrentBook != null)
+            {
+                <li>Current Book Checked out: @Model.CurrentBook</li>
+            }
+        }
+
+    </ul>
+   
+</div>

@@ -48,9 +48,17 @@ namespace CISS411.Controllers.Web
         }
 
         [Authorize]
-        public IActionResult Landing()
+        public async Task<IActionResult> Landing()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            MemberViewModel vm = new MemberViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Major = user.Major,
+                CurrentBook = user.CurrentBook
+            };
+            return View(vm);
         }
 
         [HttpGet]
@@ -83,6 +91,15 @@ namespace CISS411.Controllers.Web
             }
             TempData["ExistingAccount"] = true;
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAccount(Major major)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            user.Major = major;
+            await _userManager.UpdateAsync(user);
+            return RedirectToAction("Landing");
         }
     }
 }
