@@ -22,7 +22,7 @@ namespace CISS411.ViewComponents
             try
             {
                 var events = await _repository.Events();
-                var current = events.FirstOrDefault(e => e.IsCurrent);
+                var current = events.FirstOrDefault(e => e.IsNext);
                 return View(current);
             }
             catch (Exception ex)
