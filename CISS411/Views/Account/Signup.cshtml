@@ -6,69 +6,72 @@
         if ((bool)TempData["ExistingAccount"])
         {
         <span class="text-warning">There is already an account with that e-mail.</span>
-            }
+            
         }
     }
-<form method="post" novalidate name="signupForm" class="form-horizontal" asp-controller="Account" asp-action="Signup">
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="firstName">First Name</label>
-        <div class="col-sm-10">
-            <input class="form-control" name="firstName" id="firstName" placeholder="Enter Your First Name" ng-model="loginCtrl.newFirstName" required>
-            <span ng-show="signupForm.firstName.$error.required && signupForm.firstName.$dirty" class="text-warning">You must provide your first name</span>
+<body background="~/Imgages/LogInImg.jpg">
+    <form method="post" novalidate name="signupForm" class="form-horizontal" asp-controller="Account" asp-action="Signup">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="firstName">First Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="firstName" id="firstName" placeholder="Enter Your First Name" ng-model="loginCtrl.newFirstName" required>
+                <span ng-show="signupForm.firstName.$error.required && signupForm.firstName.$dirty" class="text-warning">You must provide your first name</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="lastName">Last Name</label>
-        <div class="col-sm-10">
-            <input class="form-control" name="lastName" id="lastName" placeholder="Enter Your Last Name" ng-model="loginCtrl.newLastName"required>
-            <span ng-show="signupForm.lastName.$error.required && signupForm.lastName.$dirty" class="text-warning">You must provide your last name</span>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="lastName">Last Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="lastName" id="lastName" placeholder="Enter Your Last Name" ng-model="loginCtrl.newLastName" required>
+                <span ng-show="signupForm.lastName.$error.required && signupForm.lastName.$dirty" class="text-warning">You must provide your last name</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Email</label>
-        <div class="col-sm-10">
-            <input type="Email" class="form-control" name="email" id="email" placeholder="Enter Your Email Address" ng-model="loginCtrl.newEmail" ng-pattern="/ccis.edu$/" required>
-            <span ng-show="signupForm.email.$error.required && signupForm.email.$dirty" class="text-warning">You must provide your email</span>
-            <span ng-show="signupForm.email.$error.pattern && signupForm.email.$dirty" class="text-warning">You must provide a Columbia College email</span>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Email</label>
+            <div class="col-sm-10">
+                <input type="Email" class="form-control" name="email" id="email" placeholder="Enter Your Email Address" ng-model="loginCtrl.newEmail" ng-pattern="/ccis.edu$/" required>
+                <span ng-show="signupForm.email.$error.required && signupForm.email.$dirty" class="text-warning">You must provide your email</span>
+                <span ng-show="signupForm.email.$error.pattern && signupForm.email.$dirty" class="text-warning">You must provide a Columbia College email</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="password">Password:</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your password" ng-model="loginCtrl.newPassword" required minlength="8">
-            <span ng-show="signupForm.password.$error.required && signupForm.password.$dirty" class="text-warning">You must provide your password</span>
-            <span ng-show="signupForm.password.$error.minlength && signupForm.password.$dirty" class="text-warning">Your password must be at least 8 characters</span>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="password">Password:</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your password" ng-model="loginCtrl.newPassword" required minlength="8">
+                <span ng-show="signupForm.password.$error.required && signupForm.password.$dirty" class="text-warning">You must provide your password</span>
+                <span ng-show="signupForm.password.$error.minlength && signupForm.password.$dirty" class="text-warning">Your password must be at least 8 characters</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="passwordConfirm">Verify Password:</label>
-        <div class="col-sm-10">
-            <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control" placeholder="Verify Your password" ng-model="loginCtrl.newPasswordConfirm" ng-pattern="{{loginCtrl.newPassword}}" required>
-            <span ng-show="signupForm.passwordConfirm.$error.required && signupForm.passwordConfirm.$dirty" class="text-warning">You must confirm your password</span>
-            <span ng-show="signupForm.passwordConfirm.$error.pattern && signupForm.passwordConfirm.$dirty" class="text-warning">Your passwords must match</span>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="passwordConfirm">Verify Password:</label>
+            <div class="col-sm-10">
+                <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control" placeholder="Verify Your password" ng-model="loginCtrl.newPasswordConfirm" ng-pattern="{{loginCtrl.newPassword}}" required>
+                <span ng-show="signupForm.passwordConfirm.$error.required && signupForm.passwordConfirm.$dirty" class="text-warning">You must confirm your password</span>
+                <span ng-show="signupForm.passwordConfirm.$error.pattern && signupForm.passwordConfirm.$dirty" class="text-warning">Your passwords must match</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="major">Major</label>
-        <div class="col-sm-10">
-            <select id="major" name="major" ng-init="loginCtrl.newMajor = '0'" ng-model="loginCtrl.newMajor">
-                <option value="0">Undecided</option>
-                <option value="1">General Studies</option>
-                <option value="2">Business and Marketing</option>
-                <option value="3">Computer Science and Math</option>
-                <option value="4">Criminal Justice and Human Services</option>
-                <option value="5">Education</option>
-                <option value="6">Fine Arts and Music</option>
-                <option value="7">History, Philosophy, and Political Science</option>
-                <option value="8">English, Literature, and Communication</option>
-                <option value="9">Science and Nursing</option>
-                <option value="10">Psychology and Sociology</option>
-            </select>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="major">Major</label>
+            <div class="col-sm-10">
+                <select id="major" name="major" ng-init="loginCtrl.newMajor = '0'" ng-model="loginCtrl.newMajor">
+                    <option value="0">Undecided</option>
+                    <option value="1">General Studies</option>
+                    <option value="2">Business and Marketing</option>
+                    <option value="3">Computer Science and Math</option>
+                    <option value="4">Criminal Justice and Human Services</option>
+                    <option value="5">Education</option>
+                    <option value="6">Fine Arts and Music</option>
+                    <option value="7">History, Philosophy, and Political Science</option>
+                    <option value="8">English, Literature, and Communication</option>
+                    <option value="9">Science and Nursing</option>
+                    <option value="10">Psychology and Sociology</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" ng-disabled="signupForm.$invalid">Submit</button>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" ng-disabled="signupForm.$invalid">Submit</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+
+</body>
