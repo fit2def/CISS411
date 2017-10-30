@@ -48,7 +48,7 @@ namespace CISS411.Models.Miscellaneous
         }
 
         private static Event AssembleFirstEvent() =>
-            new Event(){ Name = "It worked.", IsCurrent = true };
+            new Event(){ Name = "It worked.", IsNext = true };
 
         private static Book AssembleFirstBook() =>
             new Book() { Title = "It worked again.", IsCurrent = true };
