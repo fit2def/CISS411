@@ -17,12 +17,12 @@ namespace CISS411.Models.Miscellaneous
 
         public async Task<List<Event>> Events()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.Events.Include(e => e.Image).ToListAsync();
         }
 
         public async Task<List<Book>> Books()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Include(b => b.Image).ToListAsync();
         }
 
         public void AddEvent(Event anEvent)

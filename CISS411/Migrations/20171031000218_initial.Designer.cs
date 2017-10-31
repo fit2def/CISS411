@@ -12,7 +12,7 @@ using System;
 namespace CISS411.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171002204522_initial")]
+    [Migration("20171031000218_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,12 +24,22 @@ namespace CISS411.Migrations
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Book", b =>
                 {
-                    b.Property<string>("Title")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AmazonLink");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("ImageId");
 
                     b.Property<bool>("IsCurrent");
 
-                    b.HasKey("Title");
+                    b.Property<string>("Title");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Books");
                 });
@@ -39,13 +49,33 @@ namespace CISS411.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("IsCurrent");
+                    b.Property<string>("Description");
+
+                    b.Property<int>("ImageId");
+
+                    b.Property<bool>("IsNext");
 
                     b.Property<string>("Name");
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ImageId");
+
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Image", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AltText");
+
+                    b.Property<string>("FileName");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Member", b =>
@@ -58,7 +88,7 @@ namespace CISS411.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("CurrentBookTitle");
+                    b.Property<int?>("CurrentBookID");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -100,7 +130,7 @@ namespace CISS411.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CurrentBookTitle");
+                    b.HasIndex("CurrentBookID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -221,11 +251,27 @@ namespace CISS411.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CISS411.Models.DomainModels.Book", b =>
+                {
+                    b.HasOne("CISS411.Models.DomainModels.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Event", b =>
+                {
+                    b.HasOne("CISS411.Models.DomainModels.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("CISS411.Models.DomainModels.Member", b =>
                 {
                     b.HasOne("CISS411.Models.DomainModels.Book", "CurrentBook")
                         .WithMany()
-                        .HasForeignKey("CurrentBookTitle");
+                        .HasForeignKey("CurrentBookID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -30,13 +30,15 @@ namespace CISS411.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("ImageFilename");
+                    b.Property<int>("ImageId");
 
                     b.Property<bool>("IsCurrent");
 
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Books");
                 });
@@ -48,7 +50,7 @@ namespace CISS411.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("ImageFilename");
+                    b.Property<int>("ImageId");
 
                     b.Property<bool>("IsNext");
 
@@ -56,7 +58,23 @@ namespace CISS411.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ImageId");
+
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Image", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AltText");
+
+                    b.Property<string>("FileName");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Member", b =>
@@ -230,6 +248,22 @@ namespace CISS411.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Book", b =>
+                {
+                    b.HasOne("CISS411.Models.DomainModels.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Event", b =>
+                {
+                    b.HasOne("CISS411.Models.DomainModels.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Member", b =>

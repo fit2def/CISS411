@@ -24,29 +24,17 @@ namespace CISS411.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    Title = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsCurrent = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.Title);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
+                name: "Image",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsCurrent = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    AltText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.ID);
+                    table.PrimaryKey("PK_Image", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,13 +59,58 @@ namespace CISS411.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AmazonLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageId = table.Column<int>(type: "int", nullable: false),
+                    IsCurrent = table.Column<bool>(type: "bit", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Books_Image_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Image",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageId = table.Column<int>(type: "int", nullable: false),
+                    IsNext = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Events_Image_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Image",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CurrentBookTitle = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CurrentBookID = table.Column<int>(type: "int", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     EventsAttended = table.Column<int>(type: "int", nullable: false),
@@ -99,10 +132,10 @@ namespace CISS411.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Books_CurrentBookTitle",
-                        column: x => x.CurrentBookTitle,
+                        name: "FK_AspNetUsers_Books_CurrentBookID",
+                        column: x => x.CurrentBookID,
                         principalTable: "Books",
-                        principalColumn: "Title",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -219,9 +252,9 @@ namespace CISS411.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CurrentBookTitle",
+                name: "IX_AspNetUsers_CurrentBookID",
                 table: "AspNetUsers",
-                column: "CurrentBookTitle");
+                column: "CurrentBookID");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -234,6 +267,16 @@ namespace CISS411.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_ImageId",
+                table: "Books",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_ImageId",
+                table: "Events",
+                column: "ImageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -264,6 +307,9 @@ namespace CISS411.Migrations
 
             migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Image");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace CISS411.ViewComponents
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to retrieve eventss: {ex.Message}");
+                _logger.LogError($"Failed to retrieve events: {ex.Message}");
                 return View(new Event());
             }
         }

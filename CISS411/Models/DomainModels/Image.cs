@@ -10,5 +10,6 @@ namespace CISS411.Models.DomainModels
         public int ID { get; set; }
         public string FileName { get; set; }
         public string AltText { get; set; }
+
     }
 }

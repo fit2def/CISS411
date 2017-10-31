@@ -8,6 +8,7 @@
         </div>
 
         <div class="w3-col m6 w3-panel">
+            <h4>@Model.Description</h4>
             @if (User.Identity.IsAuthenticated)
             {
                 <form action="" target="_blank">
@@ -28,7 +29,7 @@
 
             else
             {
-                <button asp-controller="Account" asp-action="Signup" class="center-button btn-success">Register for an account</button>
+                <a asp-controller="Account" asp-action="Signup" class="center-button btn-success">Register to Sign Up</a>
 
             }
         </div>
