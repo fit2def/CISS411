@@ -10,5 +10,6 @@ namespace CISS411.Models.DomainModels
         public Image Image { get; set; }
         public int ImageId { get; set; }
         public string Description { get; set; }
+        public int MaxSeat { get; set; }
     }
 }

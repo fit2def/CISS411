@@ -13,7 +13,7 @@ namespace CISS411.Models.DomainModels
         [Required]
         public Major Major { get; set; }
         public Book CurrentBook { get; set; }
-        public int EventsAttended { get; set; } 
+        
         
     }
 
