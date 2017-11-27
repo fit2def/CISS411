@@ -12,8 +12,8 @@ using System;
 namespace CISS411.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171108201916_m2342")]
-    partial class m2342
+    [Migration("20171115195744_add-Quantity")]
+    partial class addQuantity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,8 @@ namespace CISS411.Migrations
 
                     b.Property<bool>("IsCurrent");
 
+                    b.Property<int>("Quantity");
+
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
@@ -54,6 +56,8 @@ namespace CISS411.Migrations
                     b.Property<int>("ImageId");
 
                     b.Property<bool>("IsNext");
+
+                    b.Property<int>("MaxSeat");
 
                     b.Property<string>("Name");
 
@@ -94,8 +98,6 @@ namespace CISS411.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<int>("EventsAttended");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
@@ -145,17 +147,13 @@ namespace CISS411.Migrations
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Registration", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<int>("EventId");
-
-                    b.Property<string>("MemberId");
 
                     b.HasKey("UserId", "EventId");
 
                     b.HasIndex("EventId");
-
-                    b.HasIndex("MemberId");
 
                     b.ToTable("Registrations");
                 });
@@ -297,10 +295,6 @@ namespace CISS411.Migrations
                         .WithMany()
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CISS411.Models.DomainModels.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

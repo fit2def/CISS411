@@ -34,6 +34,8 @@ namespace CISS411.Migrations
 
                     b.Property<bool>("IsCurrent");
 
+                    b.Property<int>("Quantity");
+
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
@@ -144,17 +146,13 @@ namespace CISS411.Migrations
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Registration", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<int>("EventId");
-
-                    b.Property<string>("MemberId");
 
                     b.HasKey("UserId", "EventId");
 
                     b.HasIndex("EventId");
-
-                    b.HasIndex("MemberId");
 
                     b.ToTable("Registrations");
                 });
@@ -296,10 +294,6 @@ namespace CISS411.Migrations
                         .WithMany()
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CISS411.Models.DomainModels.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

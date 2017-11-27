@@ -1,8 +1,9 @@
 ﻿(function () {
     var validationService = function ($http) {
-        var validate = function (loginObject) {
-            return $http.post("/Account/Login", loginobject);
+        var validate = function (loginViewModel) {
+            return $http.post("/Account/Login", loginViewModel, { headers: new Headers({ 'Content-Type': 'application/json' })});
         };
+
 
         return {
             validate: validate

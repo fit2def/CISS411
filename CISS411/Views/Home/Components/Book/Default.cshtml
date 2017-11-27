@@ -1,35 +1,40 @@
 ﻿@model Book
-<<!-- Container (Books Section) -->
+<!-- Container (Books Section) -->
 <div class="w3-content w3-container w3-padding-64" id="Books">
-    <h3 class="w3-center">Check Out Books</h3>
+    <h3 class="w3-center">What We're Reading</h3>
     <div class="w3-row w3-padding-32 w3-section">
         <div class="w3-col m6 w3-container">
             <a href="@Model.AmazonLink"><img alt=@Model.Image.AltText src="~/Images/@Model.Image.FileName" class="img-responsive" /></a>
         </div>
 
-        <div class="w3-col m6 w3-panel">
+        <div class="w3-col m6 w3-panel" ng-controller="CheckoutBookController as vm">
             <h4>@Model.Description</h4>
-            @if (User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated && Model.Quantity > 0)
             {
-                <form action="" target="_blank">
-                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-                        </div>
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-                        </div>
+                
+                <form asp-controller="Books" asp-action="CheckOut" method="post">
+                    <div class="card">
+                        <h5>Terms of checking out the book:</h5>
+                        <ol>
+                            <li>You must return the book in the same conditions that you were given</li>
+                            <li>The club has the rights to reclaim the book anytime.</li>
+                            <li>All contacts regarding book will be going to <a href="mailto:xwu2@cougars.ccis.edu">Leo</a>.</li>
+                            <li class="termAgree">Agree to terms?&nbsp;<input type="checkbox" ng-model="vm.agreeToTerms" /></li>
+                        </ol>
+                        
                     </div>
-                    <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
-                    <button class="w3-button w3-black w3-right w3-section" type="submit">
-                        <i class="fa fa-paper-plane"></i> Check Out Book
-                    </button>
+                   
+                    <br />
+                    <button type="submit" ng-disabled="!vm.agreeToTerms">Check Out</button>
+                    <br />
+                    <label>@Model.Quantity books remaining!</label>
+                    
+                    
                 </form>
             }
             else
             {
                 <a asp-controller="Account" asp-action="Signup" class="center-button btn-success">Register to Check Out</a>
-
             }
         </div>
     </div>

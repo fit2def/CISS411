@@ -262,3 +262,8 @@ span.psw {
     height: auto;
 }
 
+.termAgree {
+    list-style-type: none !important;
+}
+
+

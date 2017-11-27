@@ -25,8 +25,8 @@
                 </a>
                 <a href="/Home/Index/#home" class="w3-bar-item w3-button">HOME</a>
                 <a href="/Home/Index/#aboutUs" class="w3-bar-item w3-button w3-hide-small">ABOUT US</a>
-                <a href="/Home/Index/#Books" class="w3-bar-item w3-button w3-hide-small">BOOKS</a>
-                <a href="/Home/Index/#Events" class="w3-bar-item w3-button w3-hide-small">EVENTS</a>
+                <a href="/Home/Index/#Books" class="w3-bar-item w3-button w3-hide-small">BOOK CLUB</a>
+                <a href="/Home/Index/#Events" class="w3-bar-item w3-button w3-hide-small">EVENT</a>
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <a href="#Log_In" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="w3-bar-item w3-button w3-hide-small">LOGIN</a>
@@ -38,8 +38,7 @@
 
                 }
 
-
-                @Html.Partial("_Login", new LoginViewModel())
+                @Html.Partial("_Login")
 
             </div>
 
@@ -80,6 +79,8 @@
     <script src="~/scripts/angularScripts/ciss411-app.js"></script>
     <script src="~/scripts/angularScripts/validation-service.js"></script>
     <script src="~/scripts/angularScripts/login-controller.js"></script>
+    <script src="~/scripts/angularScripts/checkout-book-controller.js"></script>
+    
     <!-- Misc. scripts-->
     <script src="http://insitestore2.mbsbooks.com/bloomusandbox/StoreFiles/25-SchoolFiles/25-New-Website/25-js/25-wow.min.js"></script>
     <script>

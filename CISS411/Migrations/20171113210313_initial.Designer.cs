@@ -12,7 +12,7 @@ using System;
 namespace CISS411.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171031000218_initial")]
+    [Migration("20171113210313_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,8 @@ namespace CISS411.Migrations
 
                     b.Property<bool>("IsNext");
 
+                    b.Property<int>("MaxSeat");
+
                     b.Property<string>("Name");
 
                     b.HasKey("ID");
@@ -94,8 +96,6 @@ namespace CISS411.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<int>("EventsAttended");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
@@ -141,6 +141,19 @@ namespace CISS411.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Registration", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("EventId");
+
+                    b.HasKey("UserId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Registrations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -272,6 +285,14 @@ namespace CISS411.Migrations
                     b.HasOne("CISS411.Models.DomainModels.Book", "CurrentBook")
                         .WithMany()
                         .HasForeignKey("CurrentBookID");
+                });
+
+            modelBuilder.Entity("CISS411.Models.DomainModels.Registration", b =>
+                {
+                    b.HasOne("CISS411.Models.DomainModels.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

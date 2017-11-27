@@ -22,20 +22,17 @@ namespace CISS411.Controllers.Web
         [HttpGet]
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel vm)
         {
             var signInResult = await _signInManager.PasswordSignInAsync(
                 vm.Email, vm.Password, true, false);
             if (!signInResult.Succeeded)
                 return BadRequest();
-            return Ok();
-           
+            return Ok(signInResult);
         }
 
         public async Task<IActionResult> Logout()
@@ -62,7 +59,7 @@ namespace CISS411.Controllers.Web
         }
 
         [HttpGet]
-        public IActionResult Signup()
+        public IActionResult SignUp()
         {
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
@@ -70,7 +67,7 @@ namespace CISS411.Controllers.Web
         }
 
         [HttpPost]
-        public async Task<IActionResult> Signup(SignupViewModel vm)
+        public async Task<IActionResult> SignUp(SignupViewModel vm)
         {
             if (await _userManager.FindByEmailAsync(vm.Email) == null)
             {

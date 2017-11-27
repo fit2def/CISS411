@@ -7,7 +7,7 @@
       
             
 
-        vm.onsubmit = function () {
+        vm.login = function () {
             validationService.validate(
                 {
                     email: vm.email,
@@ -21,8 +21,7 @@
         }
 
         function error(response) {
-            console.log("there was a problem:", response)
-            vm.invalidcredentials = true;
+            vm.invalidCredentials = true;
         }
 
     };

@@ -1,7 +1,7 @@
 ﻿@model Event
 <!-- Container (Events Section) -->
 <div class="w3-content w3-container w3-padding-64" id="Events">
-    <h3 class="w3-center">Sign Up For Events</h3>
+    <h3 class="w3-center">Upcoming Event</h3>
     <div class="w3-row w3-padding-32 w3-section">
         <div class="w3-col m6 w3-container">
             <img alt=@Model.Image.AltText src="~/Images/@Model.Image.FileName" class="img-responsive" />
@@ -11,17 +11,24 @@
             <h4>@Model.Description</h4>
             @if (User.Identity.IsAuthenticated)
             {
-              
-
-                    <a asp-controller="EventController" asp-action="SignUp" asp-route-eventId="@Model.ID" class="btn-success">
+                if ((bool)ViewData["UserIsRegistered"])
+                {
+                    <h3>You're signed up for this event!</h3>
+                    <a asp-controller="Event" asp-action="DeRegister">Uninvite yourself</a>
+                }
+                else
+                {
+                    <a asp-controller="Event" asp-action="SignUp" asp-route-eventId="@Model.ID" class="btn-success">
                         Sign Up
                     </a>
-              
+                    <p>
+                       There are @Model.MaxSeat seats remaining. 
+                    </p>
+                }
             }
-
             else
             {
-                <a asp-controller="Account" asp-action="Signup" class="center-button btn-success">Register to Sign Up</a>
+                <a asp-controller="Account" asp-action="SignUp" class="center-button btn-success">Register to Sign Up</a>
 
             }
         </div>

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\scripts\angularScripts\modal-service.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\CISS411 - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\CISS4112017082603532 - Web Deploy.pubxml" />
   </ItemGroup>

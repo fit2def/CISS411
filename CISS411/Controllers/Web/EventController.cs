@@ -2,8 +2,6 @@
 using CISS411.Models.Miscellaneous;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,18 +18,28 @@ namespace CISS411.Controllers.Web
             _context = context;
         }
 
-        public async Task<IActionResult> SignUp(string eventId)
+       
+        public async Task<IActionResult> SignUp(int eventId)
         {
             Registration registration = new Registration();
             var user = await _userManager.GetUserAsync(User);
-            var ev = _context.Events.FirstOrDefault(e => e.ID.ToString() == eventId);
-            registration.EventId = int.Parse(eventId);
-            registration.UserId = int.Parse(user.Id);
+            var ev = _context.Events.FirstOrDefault(e => e.ID == eventId);
+            registration.EventId = eventId;
+            registration.UserId = user.Id;
             registration.Member = user;
             registration.Event = ev;
             _context.Registrations.Add(registration);
             _context.SaveChanges();
             return View(ev);
+        }
+
+        public async Task<IActionResult> DeRegister()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var registration = _context.Registrations.First(r => r.UserId == user.Id);
+            _context.Remove(registration);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
