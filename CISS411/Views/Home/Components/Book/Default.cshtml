@@ -12,7 +12,7 @@
             @if (User.Identity.IsAuthenticated && Model.Quantity > 0)
             {
                 
-                <form asp-controller="Books" asp-action="CheckOut" method="post">
+                <form asp-controller="Book" asp-route-bookId="@Model.ID" asp-action="Checkout" method="post">
                     <div class="card">
                         <h5>Terms of checking out the book:</h5>
                         <ol>

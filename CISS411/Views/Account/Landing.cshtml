@@ -9,9 +9,10 @@
     <ul>
         <li>First Name: @Model.FirstName</li>
         <li>Last Name: @Model.LastName</li>
-        <li> Major: 
+        <li>
+            Major:
             <form asp-controller="Account" asp-action="UpdateAccount">
-                <select name="major" >
+                <select name="major">
                     @if (Model.Major == Major.Undecided)
                     {
                         <option selected="selected" value="0">Undecided</option>
@@ -100,22 +101,24 @@
                     {
                         <option value="10">Psychology and Sociology</option>
                     }
-                 
+
                 </select>
                 <button type="submit" class="btn btn-info">Update Major</button>
             </form>
 
         </li>
 
-       
 
-        @{
-            if (Model.CurrentBook != null)
-            {
-                <li>Current Book Checked out: @Model.CurrentBook</li>
-            }
+
+        @if (Model.CurrentBook != null)
+        {
+            int daysLeft = Model.DateDue.Value.Day - DateTime.Now.Day;
+            <li>Current Book Checked out: @Model.CurrentBook.Title</li>
+            <li>Your due date is @Model.DateDue</li>
+            <li>You have @daysLeft until you need to return this book.</li>
         }
 
+
     </ul>
-   
+
 </div>

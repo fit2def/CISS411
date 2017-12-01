@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using CISS411.Models.Extensions;
 using AutoMapper;
 using CISS411.ViewModels;
 using CISS411.Models.DomainModels;
@@ -17,7 +16,6 @@ namespace CISS411
             });
 
             BuildWebHost(args)
-                .SeedDatabase()
                 .Run();
         }
 

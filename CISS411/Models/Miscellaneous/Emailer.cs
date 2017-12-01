@@ -13,7 +13,7 @@ namespace CISS411.Models.Miscellaneous
 
         private static void EmailAdmin(Book book, Member user)
         {
-            string message = $"{user.FirstName} {user.LastName} has checked out";
+            string message = $"{user.FirstName} {user.LastName} has checked out ";
             message += $"{book.Title}. ";
             message += $"Their email address is {user.Email}.";
 
@@ -31,9 +31,8 @@ namespace CISS411.Models.Miscellaneous
 
         private static void EmailUser(Book book, Member user)
         {
-            string message = $"Hello, {user.FirstName}, this email is verification has checked out";
-            message += $"{book.Title}. ";
-            message += $"Their email address is {user.Email}.";
+            string message = $"Hello, {user.FirstName}. We will be in contact with you shortly ";
+            message += $"regarding your checking out of {book.Title}. ";
         }
 
         private static void SendEmail(Email email)
@@ -47,7 +46,7 @@ namespace CISS411.Models.Miscellaneous
                 Body = email.Body,
             };
             mailMessage.To.Add(email.To);
-            client.Send(mailMessage);
+            //client.Send(mailMessage);
         }
     }
 }

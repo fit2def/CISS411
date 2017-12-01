@@ -29,6 +29,7 @@ namespace CISS411
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ISettings, Settings>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]));
             services.AddTransient<IModelRepository, ModelRepository>();

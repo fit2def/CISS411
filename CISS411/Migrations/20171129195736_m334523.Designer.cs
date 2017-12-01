@@ -12,9 +12,10 @@ using System;
 namespace CISS411.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171129195736_m334523")]
+    partial class m334523
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,8 +88,6 @@ namespace CISS411.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("BookID");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

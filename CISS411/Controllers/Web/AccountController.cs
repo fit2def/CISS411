@@ -1,8 +1,10 @@
 ﻿using CISS411.Models.DomainModels;
+using CISS411.Models.Miscellaneous;
 using CISS411.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,11 +14,13 @@ namespace CISS411.Controllers.Web
     {
         private SignInManager<Member> _signInManager;
         private UserManager<Member> _userManager;
+        private ApplicationDbContext _context;
 
-        public AccountController(SignInManager<Member> signIn, UserManager<Member> manager)
+        public AccountController(SignInManager<Member> signIn, UserManager<Member> manager, ApplicationDbContext context)
         {
             _signInManager = signIn;
             _userManager = manager;
+            _context = context;
         }
 
         [HttpGet]
@@ -53,7 +57,8 @@ namespace CISS411.Controllers.Web
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Major = user.Major,
-                CurrentBook = user.CurrentBook
+                Book = _context.Books.FirstOrDefault(b => b.ID == user.BookID),
+                DateDue = user.DateDue
             };
             return View(vm);
         }

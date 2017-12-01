@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,8 +13,8 @@ namespace CISS411.Models.DomainModels
         public string LastName { get; set; }
         [Required]
         public Major Major { get; set; }
-        public Book CurrentBook { get; set; }
-   
+        public int BookID { get; set; }
+        public DateTime? DateDue { get; set; }
         
     }
 
