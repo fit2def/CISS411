@@ -1,36 +1,44 @@
-﻿@model Book
+﻿@model CheckoutViewModel
 <!-- Container (Books Section) -->
 <div class="w3-content w3-container w3-padding-64" id="Books">
     <h3 class="w3-center">What We're Reading</h3>
     <div class="w3-row w3-padding-32 w3-section">
         <div class="w3-col m6 w3-container">
-            <a href="@Model.AmazonLink"><img alt=@Model.Image.AltText src="~/Images/@Model.Image.FileName" class="img-responsive" /></a>
+            <a href="@Model.Book.AmazonLink"><img alt=@Model.Book.Image.AltText src="~/Images/@Model.Book.Image.FileName" class="img-responsive" /></a>
         </div>
 
         <div class="w3-col m6 w3-panel" ng-controller="CheckoutBookController as vm">
-            <h4>@Model.Description</h4>
-            @if (User.Identity.IsAuthenticated && Model.Quantity > 0)
+            <h4>@Model.Book.Description</h4>
+            @if (User.Identity.IsAuthenticated)
             {
-                
-                <form asp-controller="Book" asp-route-bookId="@Model.ID" asp-action="Checkout" method="post">
-                    <div class="card">
-                        <h5>Terms of checking out the book:</h5>
-                        <ol>
-                            <li>You must return the book in the same conditions that you were given</li>
-                            <li>The club has the rights to reclaim the book anytime.</li>
-                            <li>All contacts regarding book will be going to <a href="mailto:xwu2@cougars.ccis.edu">Leo</a>.</li>
-                            <li class="termAgree">Agree to terms?&nbsp;<input type="checkbox" ng-model="vm.agreeToTerms" /></li>
-                        </ol>
-                        
-                    </div>
-                   
-                    <br />
-                    <button type="submit" ng-disabled="!vm.agreeToTerms">Check Out</button>
-                    <br />
-                    <label>@Model.Quantity books remaining!</label>
+                if (Model.Member.BookID == Model.Book.ID)
+                {
+                    <p>You've already checked out the book.</p>
                     
-                    
-                </form>
+                }
+                else if (Model.Book.Quantity > 0)
+                {
+                    <form asp-controller="Book" asp-route-bookId="@Model.Book.ID" asp-action="Checkout" method="post">
+                        <div class="card">
+                            <h5>Terms of checking out the book:</h5>
+                            <ol>
+                                <li>You must return the book in the same conditions that you were given</li>
+                                <li>The club has the rights to reclaim the book anytime.</li>
+                                <li>All contacts regarding book will be going to <a href="mailto:xwu2@cougars.ccis.edu">Leo</a>.</li>
+                                <li class="termAgree">Agree to terms?&nbsp;<input type="checkbox" ng-model="vm.agreeToTerms" /></li>
+                            </ol>
+                        </div>
+                        <br />
+                        <button type="submit" ng-disabled="!vm.agreeToTerms">Check Out</button>
+                        <br />
+                        <label>@Model.Book.Quantity books remaining!</label>
+                    </form>
+                }
+                else
+                {
+                    <p>All books are currently checked out.</p>
+                }
+
             }
             else
             {

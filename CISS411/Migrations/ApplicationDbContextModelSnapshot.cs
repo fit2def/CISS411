@@ -88,12 +88,10 @@ namespace CISS411.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("BookID");
+                    b.Property<int>("BookID");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<int?>("CurrentBookID");
 
                     b.Property<DateTime?>("DateDue");
 
@@ -134,8 +132,6 @@ namespace CISS411.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CurrentBookID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -283,13 +279,6 @@ namespace CISS411.Migrations
                         .WithMany()
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CISS411.Models.DomainModels.Member", b =>
-                {
-                    b.HasOne("CISS411.Models.DomainModels.Book", "CurrentBook")
-                        .WithMany()
-                        .HasForeignKey("CurrentBookID");
                 });
 
             modelBuilder.Entity("CISS411.Models.DomainModels.Registration", b =>

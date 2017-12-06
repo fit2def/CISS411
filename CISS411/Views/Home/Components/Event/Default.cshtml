@@ -16,13 +16,19 @@
                     <h3>You're signed up for this event!</h3>
                     <a asp-controller="Event" asp-action="DeRegister">Uninvite yourself</a>
                 }
+
+                else if (Model.MaxSeat == 0)
+                {
+                    <p>This event is full. Better luck next time!</p>
+                }
+
                 else
                 {
                     <a asp-controller="Event" asp-action="SignUp" asp-route-eventId="@Model.ID" class="btn-success">
                         Sign Up
                     </a>
                     <p>
-                       There are @Model.MaxSeat seats remaining. 
+                       There are @Model.MaxSeat seats remaining.
                     </p>
                 }
             }

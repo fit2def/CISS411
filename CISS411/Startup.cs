@@ -13,7 +13,7 @@ using System;
 namespace CISS411
 {
 
-    // changed something
+
     public class Startup
     {
         IConfigurationRoot _config;
@@ -53,7 +53,6 @@ namespace CISS411
             });
 
             services.AddLogging();
-            services.AddMvc();
             services.AddMvc(config =>
             {
                 //uncomment the line below once HTTPS has actually been set up.

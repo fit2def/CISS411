@@ -110,12 +110,22 @@
 
 
 
-        @if (Model.CurrentBook != null)
+        @if (Model.Book != null)
         {
-            int daysLeft = Model.DateDue.Value.Day - DateTime.Now.Day;
-            <li>Current Book Checked out: @Model.CurrentBook.Title</li>
-            <li>Your due date is @Model.DateDue</li>
-            <li>You have @daysLeft until you need to return this book.</li>
+            TimeSpan? daysLeft = Model.DateDue - DateTime.Now;
+            <li>Current Book Checked out: @Model.Book.Title</li>
+            
+            @if (daysLeft.Value.Days <= 0)
+            {
+                <li>Your book is due. Please return it by getting in touch with our <a href="mailto:xwu2@cougars.ccis.edu">librarian</a>.</li>
+            }
+            else
+            {
+                <li>Your due date is @Model.DateDue.Value.ToShortDateString().</li>
+                <li>You have @daysLeft.Value.Days days until you need to return this book.</li>
+            }
+
+
         }
 
 

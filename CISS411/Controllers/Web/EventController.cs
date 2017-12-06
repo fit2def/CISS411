@@ -28,15 +28,20 @@ namespace CISS411.Controllers.Web
             registration.UserId = user.Id;
             registration.Member = user;
             registration.Event = ev;
+            ev.MaxSeat--;
             _context.Registrations.Add(registration);
+            _context.Update(ev);
             _context.SaveChanges();
             return View(ev);
         }
 
         public async Task<IActionResult> DeRegister()
         {
+            var ev = _context.Events.FirstOrDefault(e => e.IsNext);
             var user = await _userManager.GetUserAsync(User);
             var registration = _context.Registrations.First(r => r.UserId == user.Id);
+            ev.MaxSeat++;
+            _context.Update(ev);
             _context.Remove(registration);
             _context.SaveChanges();
             return RedirectToAction("Index", "Home");
